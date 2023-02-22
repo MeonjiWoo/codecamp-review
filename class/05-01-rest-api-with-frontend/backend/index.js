@@ -7,7 +7,7 @@ import {
 import swaggerUi from "swagger-ui-express";
 import swaggerJSDoc from "swagger-jsdoc";
 import { options } from "./swagger/config.js";
-import { cors } from "cors";
+import cors from "cors";
 
 const app = express();
 
@@ -15,7 +15,7 @@ app.use(express.json()); // express는 기본적으로 JSON을 읽지 못하므�
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(options))); // swagger UI를 사용하기 위한 문법
 
-app.use(cors()); // cors 추가
+app.use(cors()); // cors 허용
 // 특정 origin만 허용해야한다면 app.use(cors({origin: }))과 같이 작성
 
 app.get("/boards", (req, res) => {
@@ -54,7 +54,7 @@ app.post("/boards", (req, res) => {
 });
 
 app.post("/tokens/phone", (req, res) => {
-  const myPhone = req.body.myPhone;
+  const myPhone = req.body.myphone;
 
   // 1. 휴대폰 번호 자릿수 확인
   const isValid = checkValidationPhoneNumber(myPhone);
